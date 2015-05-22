@@ -1,0 +1,23 @@
+﻿@model List<SenderPrototype.Models.DataTransferObjects.DtoSendTo>
+
+
+<h3>Send Announcement to</h3>
+<table class="table table-responsive">
+
+    @foreach (var reciever in Model)
+    {
+        <tr>
+            @Html.HiddenFor(m => reciever.Recievers.Id)
+            <td>
+                @Html.DisplayFor(m => reciever.Recievers.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(m => reciever.Recievers.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(m => reciever.Recievers.UserId)
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenderPrototype", "SenderPrototype\SenderPrototype.csproj", "{11119EE6-B11C-4F52-B6AF-4E024816078D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{E454B0D0-6904-4F7D-A282-B26AFB3865B7}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{1B621BC9-515B-448A-8D31-BC76B27705D4}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\SenderPrototype-WAWS-dev.json = PublishScripts\Configurations\SenderPrototype-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11119EE6-B11C-4F52-B6AF-4E024816078D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11119EE6-B11C-4F52-B6AF-4E024816078D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11119EE6-B11C-4F52-B6AF-4E024816078D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11119EE6-B11C-4F52-B6AF-4E024816078D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B621BC9-515B-448A-8D31-BC76B27705D4} = {E454B0D0-6904-4F7D-A282-B26AFB3865B7}
+	EndGlobalSection
+EndGlobal

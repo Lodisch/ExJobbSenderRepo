@@ -1,0 +1,23 @@
+﻿@model List<SenderPrototype.Models.DataTransferObjects.DtoRecieverGroups>
+
+<h2>Groups</h2>
+
+<table class="table table-responsive">
+    <tr>
+        <th>Select</th>
+        <th>Groupname</th>
+        <th>Created At</th>
+    </tr>
+
+    @foreach (var group in Model)
+    {
+        <tr>
+            @Html.HiddenFor(m => group.Id)
+            <td>@Html.CheckBoxFor(m => group.IsSelected, new { id = "selectCb", value = group.Id })</td>
+            <td>@Html.DisplayFor(m => group.Groupname)</td>
+            <td>@Html.DisplayFor(m => group.CreatedAt)</td>
+        </tr>
+    }
+</table>
+
+<button id="getChecked" class="btn btn-primary btn-lg btn-block">Send to selected</button>

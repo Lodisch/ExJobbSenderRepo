@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SiolRecieverPrototype_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Announcements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecieverGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Groupname" Type="nvarchar(max)" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recievers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar(max)" />
+          <Property Name="Firstname" Type="nvarchar(max)" />
+          <Property Name="Lastname" Type="nvarchar(max)" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Senders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id">
+          <End Role="RecieverGroups" Type="Self.RecieverGroups" Multiplicity="1" />
+          <End Role="Recievers" Type="Self.Recievers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RecieverGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recievers">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siolReciever_Senders_siolReciever_Announcements_Id">
+          <End Role="Announcements" Type="Self.Announcements" Multiplicity="1" />
+          <End Role="Senders" Type="Self.Senders" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Announcements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Senders">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siolReciever_Senders_siolReciever_Recievers_Id">
+          <End Role="Recievers" Type="Self.Recievers" Multiplicity="1" />
+          <End Role="Senders" Type="Self.Senders" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recievers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Senders">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SiolRecieverPrototype_dbModelStoreContainer">
+          <EntitySet Name="Announcements" EntityType="Self.Announcements" Schema="siolReciever" store:Type="Tables" />
+          <EntitySet Name="RecieverGroups" EntityType="Self.RecieverGroups" Schema="siolReciever" store:Type="Tables" />
+          <EntitySet Name="Recievers" EntityType="Self.Recievers" Schema="siolReciever" store:Type="Tables" />
+          <EntitySet Name="Senders" EntityType="Self.Senders" Schema="siolReciever" store:Type="Tables" />
+          <AssociationSet Name="FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id" Association="Self.FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id">
+            <End Role="RecieverGroups" EntitySet="RecieverGroups" />
+            <End Role="Recievers" EntitySet="Recievers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siolReciever_Senders_siolReciever_Announcements_Id" Association="Self.FK_siolReciever_Senders_siolReciever_Announcements_Id">
+            <End Role="Announcements" EntitySet="Announcements" />
+            <End Role="Senders" EntitySet="Senders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siolReciever_Senders_siolReciever_Recievers_Id" Association="Self.FK_siolReciever_Senders_siolReciever_Recievers_Id">
+            <End Role="Recievers" EntitySet="Recievers" />
+            <End Role="Senders" EntitySet="Senders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SiolRecieverPrototype_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SiolSenderPrototype_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Announcements" EntityType="SiolRecieverPrototype_dbModel.Announcement" />
+          <EntitySet Name="RecieverGroups" EntityType="SiolRecieverPrototype_dbModel.RecieverGroup" />
+          <EntitySet Name="Recievers" EntityType="SiolRecieverPrototype_dbModel.Reciever" />
+          <EntitySet Name="Senders" EntityType="SiolRecieverPrototype_dbModel.Sender" />
+          <AssociationSet Name="FK_siolReciever_Senders_siolReciever_Announcements_Id" Association="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Announcements_Id">
+            <End Role="Announcement" EntitySet="Announcements" />
+            <End Role="Sender" EntitySet="Senders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id" Association="SiolRecieverPrototype_dbModel.FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id">
+            <End Role="RecieverGroup" EntitySet="RecieverGroups" />
+            <End Role="Reciever" EntitySet="Recievers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siolReciever_Senders_siolReciever_Recievers_Id" Association="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Recievers_Id">
+            <End Role="Reciever" EntitySet="Recievers" />
+            <End Role="Sender" EntitySet="Senders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="Version" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sender" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Announcements_Id" FromRole="Announcement" ToRole="Sender" />
+        </EntityType>
+        <EntityType Name="RecieverGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Groupname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Reciever" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id" FromRole="RecieverGroup" ToRole="Reciever" />
+        </EntityType>
+        <EntityType Name="Reciever">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RecieverGroup" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id" FromRole="Reciever" ToRole="RecieverGroup" />
+          <NavigationProperty Name="Sender" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Recievers_Id" FromRole="Reciever" ToRole="Sender" />
+        </EntityType>
+        <EntityType Name="Sender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Announcement" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Announcements_Id" FromRole="Sender" ToRole="Announcement" />
+          <NavigationProperty Name="Reciever" Relationship="SiolRecieverPrototype_dbModel.FK_siolReciever_Senders_siolReciever_Recievers_Id" FromRole="Sender" ToRole="Reciever" />
+        </EntityType>
+        <Association Name="FK_siolReciever_Senders_siolReciever_Announcements_Id">
+          <End Type="SiolRecieverPrototype_dbModel.Announcement" Role="Announcement" Multiplicity="1" />
+          <End Type="SiolRecieverPrototype_dbModel.Sender" Role="Sender" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Announcement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sender">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siolReciever_Recievers_siolReciever_RecieverGroups_Id">
+          <End Type="SiolRecieverPrototype_dbModel.RecieverGroup" Role="RecieverGroup" Multiplicity="1" />
+          <End Type="SiolRecieverPrototype_dbModel.Reciever" Role="Reciever" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RecieverGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reciever">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siolReciever_Senders_siolReciever_Recievers_Id">
+          <End Type="SiolRecieverPrototype_dbModel.Reciever" Role="Reciever" Multiplicity="1" />
+          <End Type="SiolRecieverPrototype_dbModel.Sender" Role="Sender" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Reciever">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sender">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SiolRecieverPrototype_dbModelStoreContainer" CdmEntityContainer="SiolSenderPrototype_dbEntities">
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="SiolRecieverPrototype_dbModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcements">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecieverGroups">
+            <EntityTypeMapping TypeName="SiolRecieverPrototype_dbModel.RecieverGroup">
+              <MappingFragment StoreEntitySet="RecieverGroups">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Groupname" ColumnName="Groupname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recievers">
+            <EntityTypeMapping TypeName="SiolRecieverPrototype_dbModel.Reciever">
+              <MappingFragment StoreEntitySet="Recievers">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Senders">
+            <EntityTypeMapping TypeName="SiolRecieverPrototype_dbModel.Sender">
+              <MappingFragment StoreEntitySet="Senders">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

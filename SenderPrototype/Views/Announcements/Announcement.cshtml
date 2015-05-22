@@ -1,0 +1,22 @@
+﻿@model SenderPrototype.Models.DataTransferObjects.DtoSendTo
+
+<form id="messageForm" class="form-horizontal">
+    <div class="form-group">
+        @Html.HiddenFor(m => Model.Announcements.Id)
+        <div>
+            @Html.TextBoxFor(m => Model.Announcements.Title, new { @class = "form-control", @placeholder = "Title", id = "titleTb" })
+        </div>
+        <div>
+            @Html.TextAreaFor(m => Model.Announcements.Announcement, new { @class = "form-control", @placeholder = "Message", id = "messageTa" })
+        </div>
+    </div>
+</form>
+
+<button id="postMsgBtn" type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+
+
+
+
+
+
+
